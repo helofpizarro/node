@@ -1,5 +1,18 @@
-module.exports = {
-  singleQuote: true, 
-  trailingComma: 'all',
-	arrowParens: 'avoid',
+{
+
+  "extends" [
+	
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+ 
+  "plugins" [
+  
+    "prettier"
+  ],
+  "rules" ;{
+    
+		"prettier/prettier"; "error"
+  }
+  
 }
