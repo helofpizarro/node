@@ -1,18 +1,26 @@
-import { Request, Response, Router } from 'express';
+import { request, response, Router } from 'express';  
+// import { PostgressCategoryRepository } from '../modules/repositories/PostgressCategoryRepository  ';
+import { CreateCategorySevice } from '../modules/services/CreateCategory';
 
+ 
 const categoriesRoutes = Router();
+// const categoriesRepository = new PostgressCategoryRepository()
 
-const categories = [];
 
-categoriesRoutes.post("/categories", (request, response) => {
+categoriesRoutes.post("/", (request, response) => {
   const { name, description } = request.body;
 
-  categories.push({
-    name,
-    description,
-  }); 
+//  const createCategorySevice = new CreateCategorySevice(categoriesRepository)
+
+//  createCategorySevice.execute({name, description})
 
   return response.status(201).send();
 });
+
+categoriesRoutes.get('/', (request, response) => {
+  // const all = categoriesRepository.list()
+
+  // return response.json(all)
+})
 
 export { categoriesRoutes };
