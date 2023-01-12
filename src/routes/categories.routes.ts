@@ -1,26 +1,26 @@
 import { request, response, Router } from 'express';  
-// import { PostgressCategoryRepository } from '../modules/repositories/PostgressCategoryRepository  ';
-import { CreateCategorySevice } from '../modules/services/CreateCategory';
-
+import { createCategoryController } from '../modules/cars/useCases/CreateCategory';
+import { listCategoriesController } from '../modules/cars/useCases/listCategory';
+import { importCategoryController } from '../modules/cars/useCases/importCategories/ImportCategoryController';
+import multer from 'multer'
  
 const categoriesRoutes = Router();
-// const categoriesRepository = new PostgressCategoryRepository()
+
+const upload = multer({
+  dest: './tmp',
+})
 
 
 categoriesRoutes.post("/", (request, response) => {
-  const { name, description } = request.body;
-
-//  const createCategorySevice = new CreateCategorySevice(categoriesRepository)
-
-//  createCategorySevice.execute({name, description})
-
-  return response.status(201).send();
+  return createCategoryController.handle(request, response)
 });
 
 categoriesRoutes.get('/', (request, response) => {
-  // const all = categoriesRepository.list()
-
-  // return response.json(all)
+   return listCategoriesController.handle(request, response) 
 })
+
+categoriesRoutes.post('/import', upload.single('file'), (request, response) => {
+    return importCategoryController.handle(request, response)
+})  
 
 export { categoriesRoutes };
